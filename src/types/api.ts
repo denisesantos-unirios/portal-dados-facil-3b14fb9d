@@ -3,6 +3,7 @@ export interface ApiModule {
   name: string;
   description: string;
   icon: string;
+  color: string;
   endpoints: Endpoint[];
 }
 
