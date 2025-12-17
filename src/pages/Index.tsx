@@ -56,9 +56,9 @@ const Index = () => {
         <div className="grid lg:grid-cols-12 gap-8">
           {/* Sidebar - Modules */}
           <aside className="lg:col-span-4 xl:col-span-3">
-            <div className="sticky top-8">
+            <div className="sticky top-20">
               <h2 className="text-lg font-semibold mb-4 text-foreground">Módulos</h2>
-              <div className="grid gap-3">
+              <div className="grid gap-3 max-h-[calc(100vh-180px)] overflow-y-auto pr-2">
                 {apiModules.map((module) => (
                   <ModuleCard
                     key={module.id}
@@ -95,8 +95,34 @@ const Index = () => {
         </div>
       </main>
 
+      {/* Forum CTA Section */}
+      <section className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-t border-border">
+        <div className="container mx-auto px-4 py-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-xl bg-primary/20">
+                <MessageSquare className="h-8 w-8 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-foreground">Fórum de Discussões</h3>
+                <p className="text-muted-foreground">
+                  Tire dúvidas, compartilhe conhecimento e conecte-se com outros desenvolvedores.
+                </p>
+              </div>
+            </div>
+            <NavLink 
+              to="/forum" 
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors flex items-center gap-2"
+            >
+              Acessar Fórum
+              <MessageSquare className="h-4 w-4" />
+            </NavLink>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="border-t border-border mt-12">
+      <footer className="border-t border-border">
         <div className="container mx-auto px-4 py-6">
           <p className="text-sm text-muted-foreground text-center">
             Dados fornecidos pelo Portal de Dados Abertos do Governo Federal •{" "}

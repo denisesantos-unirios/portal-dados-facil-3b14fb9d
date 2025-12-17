@@ -1,7 +1,22 @@
 import { ApiModule } from "@/types/api";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Package, Briefcase, Building2, Landmark, FileText, ShoppingCart, LucideIcon } from "lucide-react";
+import { 
+  Package, 
+  Briefcase, 
+  Building2, 
+  Landmark, 
+  FileText, 
+  ShoppingCart, 
+  DollarSign, 
+  ClipboardList, 
+  History, 
+  FileSignature, 
+  FileSpreadsheet,
+  Globe,
+  Bot,
+  LucideIcon 
+} from "lucide-react";
 
 const iconMap: Record<string, LucideIcon> = {
   Package,
@@ -10,6 +25,13 @@ const iconMap: Record<string, LucideIcon> = {
   Landmark,
   FileText,
   ShoppingCart,
+  DollarSign,
+  ClipboardList,
+  History,
+  FileSignature,
+  FileSpreadsheet,
+  Globe,
+  Bot,
 };
 
 interface ModuleCardProps {
@@ -32,12 +54,12 @@ export function ModuleCard({ module, isSelected, onClick }: ModuleCardProps) {
     >
       <CardHeader className="pb-3">
         <div className="flex items-center gap-3">
-          <div className={`p-2.5 rounded-lg ${isSelected ? "gradient-hero" : "bg-muted"}`}>
-            <Icon className={`h-5 w-5 ${isSelected ? "text-primary-foreground" : "text-primary"}`} />
+          <div className={`p-2.5 rounded-lg ${module.color}`}>
+            <Icon className="h-5 w-5 text-white" />
           </div>
-          <div className="flex-1">
-            <CardTitle className="text-base font-semibold">{module.name}</CardTitle>
-            <CardDescription className="text-sm mt-0.5">{module.description}</CardDescription>
+          <div className="flex-1 min-w-0">
+            <CardTitle className="text-sm font-semibold truncate">{module.name}</CardTitle>
+            <CardDescription className="text-xs mt-0.5 line-clamp-2">{module.description}</CardDescription>
           </div>
         </div>
       </CardHeader>
