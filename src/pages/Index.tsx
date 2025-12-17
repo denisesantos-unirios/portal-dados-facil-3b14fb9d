@@ -3,11 +3,13 @@ import { apiModules } from "@/data/modules";
 import { ModuleCard } from "@/components/ModuleCard";
 import { EndpointPanel } from "@/components/EndpointPanel";
 import { ApiModule } from "@/types/api";
-import { Database, ExternalLink, MessageSquare } from "lucide-react";
+import { Database, ExternalLink, MessageSquare, Search } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
+import { Input } from "@/components/ui/input";
 
 const Index = () => {
   const [selectedModule, setSelectedModule] = useState<ApiModule | null>(null);
+  const [moduleSearch, setModuleSearch] = useState("");
 
   return (
     <div className="min-h-screen bg-background">
@@ -27,8 +29,8 @@ const Index = () => {
 
       {/* Hero Section */}
       <div className="gradient-hero">
-        <div className="container mx-auto px-4 py-8 sm:py-12">
-          <div className="flex items-center gap-3 mb-4">
+        <div className="container mx-auto px-4 py-8 sm:py-12 text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
             <div className="p-2.5 rounded-xl bg-primary-foreground/20 backdrop-blur-sm">
               <Database className="h-6 w-6 text-primary-foreground" />
             </div>
@@ -36,7 +38,7 @@ const Index = () => {
               Dados Abertos - Compras Gov
             </h1>
           </div>
-          <p className="text-primary-foreground/80 max-w-2xl">
+          <p className="text-primary-foreground/80 max-w-2xl mx-auto">
             Consulte informações públicas sobre compras governamentais, contratos, fornecedores e
             catálogos através da API de Dados Abertos do Governo Federal.
           </p>
@@ -57,16 +59,30 @@ const Index = () => {
           {/* Sidebar - Modules */}
           <aside className="lg:col-span-4 xl:col-span-3">
             <div className="sticky top-20">
-              <h2 className="text-lg font-semibold mb-4 text-foreground">Módulos</h2>
-              <div className="grid gap-3 max-h-[calc(100vh-180px)] overflow-y-auto pr-2">
-                {apiModules.map((module) => (
-                  <ModuleCard
-                    key={module.id}
-                    module={module}
-                    isSelected={selectedModule?.id === module.id}
-                    onClick={() => setSelectedModule(module)}
-                  />
-                ))}
+              <h2 className="text-lg font-semibold mb-4 text-foreground text-center">Módulos</h2>
+              <div className="relative mb-4">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  placeholder="Buscar módulos..."
+                  value={moduleSearch}
+                  onChange={(e) => setModuleSearch(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+              <div className="grid gap-3 max-h-[calc(100vh-260px)] overflow-y-auto pr-2">
+                {apiModules
+                  .filter((module) =>
+                    module.name.toLowerCase().includes(moduleSearch.toLowerCase()) ||
+                    module.description.toLowerCase().includes(moduleSearch.toLowerCase())
+                  )
+                  .map((module) => (
+                    <ModuleCard
+                      key={module.id}
+                      module={module}
+                      isSelected={selectedModule?.id === module.id}
+                      onClick={() => setSelectedModule(module)}
+                    />
+                  ))}
               </div>
             </div>
           </aside>
