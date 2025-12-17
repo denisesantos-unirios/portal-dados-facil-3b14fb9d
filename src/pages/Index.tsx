@@ -3,7 +3,8 @@ import { apiModules } from "@/data/modules";
 import { ModuleCard } from "@/components/ModuleCard";
 import { EndpointPanel } from "@/components/EndpointPanel";
 import { ApiModule } from "@/types/api";
-import { Database, ExternalLink } from "lucide-react";
+import { Database, ExternalLink, MessageSquare } from "lucide-react";
+import { NavLink } from "@/components/NavLink";
 
 const Index = () => {
   const [selectedModule, setSelectedModule] = useState<ApiModule | null>(null);
@@ -11,7 +12,21 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="gradient-hero">
+      <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-10">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Database className="w-6 h-6 text-primary" />
+            <span className="font-bold text-lg">ComprasGov Explorer</span>
+          </div>
+          <nav className="flex items-center gap-4">
+            <NavLink to="/" className="text-muted-foreground hover:text-foreground transition-colors" activeClassName="text-primary font-medium">API Explorer</NavLink>
+            <NavLink to="/forum" className="text-muted-foreground hover:text-foreground transition-colors" activeClassName="text-primary font-medium">Fórum</NavLink>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <div className="gradient-hero">
         <div className="container mx-auto px-4 py-8 sm:py-12">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-2.5 rounded-xl bg-primary-foreground/20 backdrop-blur-sm">
@@ -34,7 +49,7 @@ const Index = () => {
             Ver documentação completa <ExternalLink className="h-4 w-4" />
           </a>
         </div>
-      </header>
+      </div>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
