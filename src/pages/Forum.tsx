@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { MessageSquare, Plus, Search, Users, MessagesSquare } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { MessageSquare, Search, Users, MessagesSquare } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DiscussionCard } from "@/components/DiscussionCard";
 import { forumCategories, forumStats, discussions } from "@/data/forum";
 import { NavLink } from "@/components/NavLink";
+import { NewDiscussionForm } from "@/components/NewDiscussionForm";
 
 export default function Forum() {
   const [selectedCategory, setSelectedCategory] = useState("todos");
@@ -52,10 +52,7 @@ export default function Forum() {
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-4">
             {/* New Discussion Button */}
-            <Button className="w-full gap-2">
-              <Plus className="w-4 h-4" />
-              Nova Discussão
-            </Button>
+            <NewDiscussionForm />
 
             {/* Categories */}
             <Card className="p-4">
