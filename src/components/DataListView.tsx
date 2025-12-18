@@ -31,12 +31,14 @@ import { cn } from "@/lib/utils";
 
 interface DataListViewProps {
   module: ApiModule;
+  endpoint?: Endpoint;
 }
 
 const BASE_URL = "https://dadosabertos.compras.gov.br";
+const PAGE_SIZE = 10;
 
-export function DataListView({ module }: DataListViewProps) {
-  const [selectedEndpoint, setSelectedEndpoint] = useState<Endpoint>(module.endpoints[0]);
+export function DataListView({ module, endpoint: initialEndpoint }: DataListViewProps) {
+  const [selectedEndpoint, setSelectedEndpoint] = useState<Endpoint>(initialEndpoint || module.endpoints[0]);
   const [params, setParams] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<any[]>([]);
@@ -48,11 +50,15 @@ export function DataListView({ module }: DataListViewProps) {
 
   // Reset when module changes
   useEffect(() => {
-    setSelectedEndpoint(module.endpoints[0]);
+    if (initialEndpoint) {
+      setSelectedEndpoint(initialEndpoint);
+    } else {
+      setSelectedEndpoint(module.endpoints[0]);
+    }
     setParams({});
     setData([]);
     setError(null);
-  }, [module.id]);
+  }, [module.id, initialEndpoint?.id]);
 
   // Auto-load when endpoint changes
   useEffect(() => {
@@ -73,7 +79,7 @@ export function DataListView({ module }: DataListViewProps) {
       if (value) queryParams.append(key, value);
     });
     if (page) queryParams.set("pagina", String(page));
-    queryParams.set("tamanhoPagina", "20");
+    queryParams.set("tamanhoPagina", String(PAGE_SIZE));
     const queryString = queryParams.toString();
     return `${BASE_URL}${selectedEndpoint.path}${queryString ? `?${queryString}` : ""}`;
   };
@@ -387,10 +393,10 @@ export function DataListView({ module }: DataListViewProps) {
               </ScrollArea>
 
               {/* Pagination */}
-              {totalRecords > 20 && (
+              {totalRecords > PAGE_SIZE && (
                 <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
                   <p className="text-sm text-muted-foreground">
-                    Página {currentPage} • {Math.min(20, data.length)} de {totalRecords} registros
+                    Página {currentPage} • {Math.min(PAGE_SIZE, data.length)} de {totalRecords} registros
                   </p>
                   <div className="flex gap-2">
                     <Button
