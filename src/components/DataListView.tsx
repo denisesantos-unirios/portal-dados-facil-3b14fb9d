@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { 
   Search, Loader2, Download, RefreshCw, ChevronLeft, ChevronRight, 
-  Filter, AlertCircle, Eye, X, SlidersHorizontal, List
+  Filter, AlertCircle, Eye, X, SlidersHorizontal, List, Database
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -28,6 +28,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { getMockData } from "@/data/mockData";
 
 interface DataListViewProps {
   module: ApiModule;
@@ -89,34 +90,14 @@ export function DataListView({ module, endpoint: initialEndpoint }: DataListView
     setError(null);
     setCurrentPage(page);
 
-    try {
-      const url = buildUrl(page);
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        throw new Error(`Erro ${response.status}: ${response.statusText}`);
-      }
-      
-      const result = await response.json();
-      
-      if (Array.isArray(result)) {
-        setData(result);
-        setTotalRecords(result.length);
-      } else if (result.content || result.data || result.items || result.resultado) {
-        const items = result.content || result.data || result.items || result.resultado || [];
-        setData(Array.isArray(items) ? items : [items]);
-        setTotalRecords(result.totalElements || result.total || result.totalRegistros || items.length);
-      } else {
-        setData([result]);
-        setTotalRecords(1);
-      }
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Erro ao executar consulta";
-      setError(errorMessage);
-      setData([]);
-    } finally {
-      setLoading(false);
-    }
+    // Using mock data since API has CORS restrictions
+    // In production, use a proxy server or backend
+    await new Promise(resolve => setTimeout(resolve, 300)); // Simulate loading
+    
+    const mockData = getMockData(selectedEndpoint.id);
+    setData(mockData);
+    setTotalRecords(mockData.length);
+    setLoading(false);
   };
 
   const exportToCsv = () => {
