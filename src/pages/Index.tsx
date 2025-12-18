@@ -89,26 +89,39 @@ const Index = () => {
         />
 
         {/* Main Content */}
-        <main className="flex-1 overflow-hidden bg-muted/30">
-          {selectedModule ? (
-            <DataListView
-              key={`${selectedModule.id}-${selectedEndpoint?.id}`}
-              module={selectedModule}
-              endpoint={selectedEndpoint}
-            />
-          ) : (
-            <div className="flex items-center justify-center h-full">
-              <div className="text-center">
-                <Database className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-                <h2 className="text-xl font-medium text-muted-foreground">
-                  Selecione um módulo
-                </h2>
-                <p className="text-sm text-muted-foreground/70 mt-2 max-w-md">
-                  Escolha um módulo no menu lateral para visualizar os dados.
-                </p>
+        <main className="flex-1 overflow-hidden bg-muted/30 flex flex-col">
+          {/* Hero Header */}
+          <div className="px-6 py-5 border-b border-border bg-card">
+            <h1 className="text-xl font-bold text-foreground">
+              Dados Abertos - Compras Gov
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Consulte informações públicas sobre compras governamentais, contratos, fornecedores e catálogos através da API de Dados Abertos do Governo Federal.
+            </p>
+          </div>
+          
+          {/* Data Content */}
+          <div className="flex-1 overflow-hidden">
+            {selectedModule ? (
+              <DataListView
+                key={`${selectedModule.id}-${selectedEndpoint?.id}`}
+                module={selectedModule}
+                endpoint={selectedEndpoint}
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full">
+                <div className="text-center">
+                  <Database className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
+                  <h2 className="text-xl font-medium text-muted-foreground">
+                    Selecione um módulo
+                  </h2>
+                  <p className="text-sm text-muted-foreground/70 mt-2 max-w-md">
+                    Escolha um módulo no menu lateral para visualizar os dados.
+                  </p>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </main>
       </div>
     </div>
