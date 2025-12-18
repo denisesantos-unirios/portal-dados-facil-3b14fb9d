@@ -1,0 +1,304 @@
+export interface ModuleFlow {
+  id: string;
+  number: string;
+  name: string;
+  description: string;
+  icon: string;
+  color: string;
+  endpoints: FlowEndpoint[];
+  useCases: string[];
+}
+
+export interface FlowEndpoint {
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+  path: string;
+  description: string;
+}
+
+export const moduleFlows: ModuleFlow[] = [
+  {
+    id: "catalogo-material",
+    number: "01",
+    name: "Catálogo - Material (CATMAT)",
+    description: "Catálogo de Materiais (CATMAT): Consulta itens de materiais com dados detalhados, incluindo grupos, classes, PDM, itens, natureza de despesa, unidades de fornecimento e características.",
+    icon: "Package",
+    color: "bg-blue-500",
+    endpoints: [
+      { method: "GET", path: "/modulo-material/1_consultarGrupoMaterial", description: "Consulta grupos de materiais" },
+      { method: "GET", path: "/modulo-material/2_consultarClasseMaterial", description: "Consulta classes de materiais" },
+      { method: "GET", path: "/modulo-material/3_consultarPdmMaterial", description: "Consulta PDM de materiais" },
+      { method: "GET", path: "/modulo-material/4_consultarItemMaterial", description: "Consulta itens de materiais" },
+      { method: "GET", path: "/modulo-material/5_consultarMaterialNaturezaDespesa", description: "Consulta natureza de despesa de materiais" },
+      { method: "GET", path: "/modulo-material/6_consultarMaterialUnidadeFornecimento", description: "Consulta unidades de fornecimento" },
+      { method: "GET", path: "/modulo-material/7_consultarMaterialCaracteristicas", description: "Consulta características de materiais" },
+    ],
+    useCases: [
+      "Identificar códigos CATMAT para itens de materiais",
+      "Consultar hierarquia de classificação de materiais",
+      "Obter características técnicas de itens",
+      "Verificar unidades de fornecimento aceitas",
+    ],
+  },
+  {
+    id: "catalogo-servico",
+    number: "02",
+    name: "Catálogo - Serviço (CATSER)",
+    description: "Catálogo de Serviços (CATSER): Consulta serviços com informações detalhadas, incluindo seções, divisões, grupos, classes, subclasses, itens, unidades de medida e natureza de despesa.",
+    icon: "Briefcase",
+    color: "bg-teal-500",
+    endpoints: [
+      { method: "GET", path: "/modulo-servico/1_consultarSecaoServico", description: "Consulta seções de serviços" },
+      { method: "GET", path: "/modulo-servico/2_consultarDivisaoServico", description: "Consulta divisões de serviços" },
+      { method: "GET", path: "/modulo-servico/3_consultarGrupoServico", description: "Consulta grupos de serviços" },
+      { method: "GET", path: "/modulo-servico/4_consultarClasseServico", description: "Consulta classes de serviços" },
+      { method: "GET", path: "/modulo-servico/5_consultarSubClasseServico", description: "Consulta subclasses de serviços" },
+      { method: "GET", path: "/modulo-servico/6_consultarItemServico", description: "Consulta itens de serviços" },
+      { method: "GET", path: "/modulo-servico/7_consultarUndMedidaServico", description: "Consulta unidades de medida" },
+      { method: "GET", path: "/modulo-servico/8_consultarNaturezaDespesaServico", description: "Consulta natureza de despesa" },
+    ],
+    useCases: [
+      "Identificar códigos CATSER para serviços",
+      "Consultar hierarquia de classificação de serviços",
+      "Obter unidades de medida para contratação",
+      "Verificar natureza de despesa aplicável",
+    ],
+  },
+  {
+    id: "pesquisa-preco",
+    number: "03",
+    name: "Pesquisa de Preço - Preços Praticados",
+    description: "Consulta preços praticados nas compras públicas por códigos de itens do CATMAT e CATSER. Permite obter dados detalhados e exportar em CSV.",
+    icon: "DollarSign",
+    color: "bg-green-500",
+    endpoints: [
+      { method: "GET", path: "/modulo-pesquisa-preco/1_consultarMaterial", description: "Consulta preços de materiais" },
+      { method: "GET", path: "/modulo-pesquisa-preco/1.1_consultarMaterial_CSV", description: "Exporta preços de materiais em CSV" },
+      { method: "GET", path: "/modulo-pesquisa-preco/2_consultarMaterialDetalhe", description: "Detalhes de preços de materiais" },
+      { method: "GET", path: "/modulo-pesquisa-preco/2.1_consultarMaterialDetalhe_CSV", description: "Exporta detalhes em CSV" },
+      { method: "GET", path: "/modulo-pesquisa-preco/3_consultarServico", description: "Consulta preços de serviços" },
+      { method: "GET", path: "/modulo-pesquisa-preco/3.1_consultarServico_CSV", description: "Exporta preços de serviços em CSV" },
+      { method: "GET", path: "/modulo-pesquisa-preco/4_consultarServicoDetalhe", description: "Detalhes de preços de serviços" },
+      { method: "GET", path: "/modulo-pesquisa-preco/4.1_consultarServicoDetalhe_CSV", description: "Exporta detalhes em CSV" },
+    ],
+    useCases: [
+      "Realizar pesquisa de preços para editais",
+      "Comparar preços praticados por diferentes órgãos",
+      "Fundamentar estimativa de custos",
+      "Exportar dados para análise em planilhas",
+    ],
+  },
+  {
+    id: "pgc",
+    number: "04",
+    name: "PGC - Planejamento e Gerenciamento de Contratações",
+    description: "Consulta dados sobre Planejamento e Gerenciamento de Contratações (PGC), incluindo detalhes, catálogo e agregação.",
+    icon: "ClipboardList",
+    color: "bg-purple-500",
+    endpoints: [
+      { method: "GET", path: "/modulo-pgc/1_consultarPgcDetalhe", description: "Consulta detalhes do PGC" },
+      { method: "GET", path: "/modulo-pgc/1.1_consultarPgcDetalhe_CSV", description: "Exporta detalhes em CSV" },
+      { method: "GET", path: "/modulo-pgc/2_consultarPgcDetalheCatalogo", description: "Consulta catálogo do PGC" },
+      { method: "GET", path: "/modulo-pgc/2.1_consultarPgcDetalheCatalogo_CSV", description: "Exporta catálogo em CSV" },
+      { method: "GET", path: "/modulo-pgc/3_consultarPgcAgregacao", description: "Consulta agregação do PGC" },
+      { method: "GET", path: "/modulo-pgc/3.1_consultarPgcAgregacao_CSV", description: "Exporta agregação em CSV" },
+    ],
+    useCases: [
+      "Consultar planejamentos de contratações",
+      "Verificar itens programados para aquisição",
+      "Analisar demandas consolidadas",
+      "Acompanhar cronograma de contratações",
+    ],
+  },
+  {
+    id: "uasg",
+    number: "05",
+    name: "UASG - Unidades Administrativas",
+    description: "Consulta dados sobre Unidades Administrativas de Serviços Gerais (UASG) e órgãos vinculados.",
+    icon: "Building2",
+    color: "bg-indigo-500",
+    endpoints: [
+      { method: "GET", path: "/modulo-uasg/1_consultarUasg", description: "Consulta UASGs" },
+      { method: "GET", path: "/modulo-uasg/1.1_consultarUasg_CSV", description: "Exporta UASGs em CSV" },
+      { method: "GET", path: "/modulo-uasg/2_consultarOrgao", description: "Consulta órgãos" },
+      { method: "GET", path: "/modulo-uasg/2.1_consultarOrgao_CSV", description: "Exporta órgãos em CSV" },
+    ],
+    useCases: [
+      "Identificar códigos UASG de órgãos",
+      "Consultar estrutura administrativa",
+      "Obter dados de contato de unidades",
+      "Verificar vinculação de unidades a órgãos",
+    ],
+  },
+  {
+    id: "legado",
+    number: "06",
+    name: "Legado - Lei 8.666/1993",
+    description: "Consulta licitações realizadas sob a Lei nº 8.666/1993 e leis anteriores à Lei nº 14.133/2021, incluindo pregões, compras sem licitação e RDC.",
+    icon: "History",
+    color: "bg-orange-500",
+    endpoints: [
+      { method: "GET", path: "/modulo-legado/1_consultarLicitacao", description: "Consulta licitações" },
+      { method: "GET", path: "/modulo-legado/1.1_consultarLicitacao_Id", description: "Consulta licitação por ID" },
+      { method: "GET", path: "/modulo-legado/2_consultarItemLicitacao", description: "Consulta itens de licitação" },
+      { method: "GET", path: "/modulo-legado/2.1_consultarItemLicitacao_Id", description: "Consulta item por ID" },
+      { method: "GET", path: "/modulo-legado/3_consultarPregoes", description: "Consulta pregões" },
+      { method: "GET", path: "/modulo-legado/3.1_consultarPregoes_Id", description: "Consulta pregão por ID" },
+      { method: "GET", path: "/modulo-legado/4_consultarItensPregoes", description: "Consulta itens de pregões" },
+      { method: "GET", path: "/modulo-legado/4.1_consultarItensPregoes_Id", description: "Consulta item de pregão por ID" },
+      { method: "GET", path: "/modulo-legado/5_consultarComprasSemLicitacao", description: "Consulta dispensas/inexigibilidades" },
+      { method: "GET", path: "/modulo-legado/5.1_consultarCompraSemLicitacao_Id", description: "Consulta dispensa por ID" },
+      { method: "GET", path: "/modulo-legado/6_consultarCompraItensSemLicitacao", description: "Consulta itens de dispensas" },
+      { method: "GET", path: "/modulo-legado/6.1_consultarItensComprasSemLicitacao_Id", description: "Consulta item de dispensa por ID" },
+      { method: "GET", path: "/modulo-legado/7_consultarRdc", description: "Consulta RDC" },
+    ],
+    useCases: [
+      "Consultar licitações históricas",
+      "Analisar pregões eletrônicos realizados",
+      "Verificar dispensas e inexigibilidades",
+      "Consultar procedimentos RDC",
+    ],
+  },
+  {
+    id: "contratacoes",
+    number: "07",
+    name: "Contratações - Lei 14.133/2021",
+    description: "Consulta contratações realizadas sob a Nova Lei de Licitações nº 14.133/2021 via PNCP.",
+    icon: "FileText",
+    color: "bg-cyan-500",
+    endpoints: [
+      { method: "GET", path: "/modulo-contratacoes/1_consultarContratacoes_PNCP_14133", description: "Consulta contratações PNCP" },
+      { method: "GET", path: "/modulo-contratacoes/1.1_consultarContratacoes_PNCP_14133_Id", description: "Consulta contratação por ID" },
+      { method: "GET", path: "/modulo-contratacoes/2_consultarItensContratacoes_PNCP_14133", description: "Consulta itens de contratações" },
+      { method: "GET", path: "/modulo-contratacoes/2.1_consultarItensContratacoes_PNCP_14133_Id", description: "Consulta item por ID" },
+      { method: "GET", path: "/modulo-contratacoes/3_consultarResultadoItensContratacoes_PNCP_14133", description: "Consulta resultados de itens" },
+      { method: "GET", path: "/modulo-contratacoes/3.1_consultarResultadoItensContratacoes_PNCP_14133_Id", description: "Consulta resultado por ID" },
+    ],
+    useCases: [
+      "Consultar contratações pela nova lei",
+      "Acompanhar processos no PNCP",
+      "Verificar resultados de itens",
+      "Analisar contratações por modalidade",
+    ],
+  },
+  {
+    id: "arp",
+    number: "08",
+    name: "ARP - Atas de Registro de Preços",
+    description: "Consulta Atas de Registro de Preços (ARP) e seus respectivos itens registrados.",
+    icon: "FileSignature",
+    color: "bg-pink-500",
+    endpoints: [
+      { method: "GET", path: "/modulo-arp/1_consultarARP", description: "Consulta atas de registro de preços" },
+      { method: "GET", path: "/modulo-arp/1.1_consultarARP_Id", description: "Consulta ARP por ID" },
+      { method: "GET", path: "/modulo-arp/2_consultarARPItem", description: "Consulta itens de ARP" },
+      { method: "GET", path: "/modulo-arp/2.1_consultarARPItem_Id", description: "Consulta item de ARP por ID" },
+    ],
+    useCases: [
+      "Consultar atas de registro de preços vigentes",
+      "Verificar itens e preços registrados",
+      "Identificar oportunidades de adesão (carona)",
+      "Comparar preços entre atas",
+    ],
+  },
+  {
+    id: "contratos",
+    number: "09",
+    name: "Contratos",
+    description: "Consulta contratos administrativos e seus respectivos itens contratuais.",
+    icon: "FileSpreadsheet",
+    color: "bg-red-500",
+    endpoints: [
+      { method: "GET", path: "/modulo-contratos/1_consultarContratos", description: "Consulta contratos" },
+      { method: "GET", path: "/modulo-contratos/1.1_consultarContratos_Id", description: "Consulta contrato por ID" },
+      { method: "GET", path: "/modulo-contratos/2_consultarContratosItem", description: "Consulta itens de contratos" },
+      { method: "GET", path: "/modulo-contratos/2.1_consultarContratosItem_Id", description: "Consulta item por ID" },
+    ],
+    useCases: [
+      "Consultar contratos vigentes",
+      "Verificar valores e prazos contratuais",
+      "Analisar itens contratados",
+      "Acompanhar execução contratual",
+    ],
+  },
+  {
+    id: "fornecedor",
+    number: "10",
+    name: "Fornecedor",
+    description: "Consulta fornecedores registrados no sistema de compras governamentais.",
+    icon: "ShoppingCart",
+    color: "bg-amber-500",
+    endpoints: [
+      { method: "GET", path: "/modulo-fornecedor/1_consultarFornecedor", description: "Consulta fornecedores" },
+    ],
+    useCases: [
+      "Consultar dados cadastrais de fornecedores",
+      "Verificar situação cadastral",
+      "Identificar fornecedores por segmento",
+      "Consultar CNPJ/CPF de fornecedores",
+    ],
+  },
+  {
+    id: "ocds",
+    number: "11",
+    name: "OCDS - Open Contracting Data Standard",
+    description: "Consulta contratações no formato OCDS (Open Contracting Data Standard), padrão internacional para transparência em contratações.",
+    icon: "Globe",
+    color: "bg-emerald-500",
+    endpoints: [
+      { method: "GET", path: "/modulo-ocds/1_releases", description: "Consulta releases OCDS" },
+    ],
+    useCases: [
+      "Integrar com sistemas internacionais",
+      "Obter dados em formato padronizado",
+      "Análises comparativas globais",
+      "Transparência em padrão internacional",
+    ],
+  },
+  {
+    id: "alice",
+    number: "98",
+    name: "ALICE - Analisador de Licitações",
+    description: "Serviços de integração com o Analisador de Licitações, Contratos e Editais (Alice) do Compras.gov.",
+    icon: "Bot",
+    color: "bg-violet-500",
+    endpoints: [
+      { method: "GET", path: "/alice/avisos-restritos", description: "Consulta avisos restritos" },
+      { method: "GET", path: "/alice/compras", description: "Consulta compras ALICE" },
+      { method: "GET", path: "/alice/tickets", description: "Consulta tickets ALICE" },
+    ],
+    useCases: [
+      "Consultar alertas de riscos em licitações",
+      "Verificar avisos do sistema ALICE",
+      "Integrar análises automatizadas",
+      "Acompanhar tickets de análise",
+    ],
+  },
+  {
+    id: "usuarios",
+    number: "99",
+    name: "Usuários",
+    description: "Serviço de gestão de usuários da API de Dados Abertos.",
+    icon: "Landmark",
+    color: "bg-slate-500",
+    endpoints: [
+      { method: "PATCH", path: "/usuarios/atualizar/{id}", description: "Atualiza usuário" },
+      { method: "GET", path: "/usuarios/consultar", description: "Consulta usuários" },
+      { method: "POST", path: "/usuarios/criar", description: "Cria novo usuário" },
+      { method: "PATCH", path: "/usuarios/resetSenha/{id}", description: "Reset de senha" },
+    ],
+    useCases: [
+      "Gerenciar contas de acesso",
+      "Criar novos usuários da API",
+      "Resetar senhas de acesso",
+      "Consultar usuários cadastrados",
+    ],
+  },
+];
+
+export const apiInfo = {
+  version: "1.0.0",
+  openApiVersion: "OAS 3.1",
+  baseUrl: "https://dadosabertos.compras.gov.br",
+  documentation: "https://dadosabertos.compras.gov.br/swagger-ui/index.html",
+  portalUrl: "https://www.gov.br/compras/pt-br/cidadao/compras-publicas-dados-abertos",
+};
