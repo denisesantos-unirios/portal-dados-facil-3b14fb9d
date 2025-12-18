@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { apiModules } from "@/data/modules";
-import { ApiModule } from "@/types/api";
+import { ApiModule, Endpoint } from "@/types/api";
 import { SystemSidebar } from "@/components/SystemSidebar";
 import { DataListView } from "@/components/DataListView";
 import { NavLink } from "@/components/NavLink";
@@ -8,6 +8,19 @@ import { Database, FileText, ListTodo, MessageSquare, LayoutGrid } from "lucide-
 
 const Index = () => {
   const [selectedModule, setSelectedModule] = useState<ApiModule | null>(apiModules[0] || null);
+  const [selectedEndpoint, setSelectedEndpoint] = useState<Endpoint | undefined>(
+    apiModules[0]?.endpoints[0]
+  );
+
+  const handleSelectModule = (module: ApiModule) => {
+    setSelectedModule(module);
+    setSelectedEndpoint(module.endpoints[0]);
+  };
+
+  const handleSelectEndpoint = (module: ApiModule, endpoint: Endpoint) => {
+    setSelectedModule(module);
+    setSelectedEndpoint(endpoint);
+  };
 
   return (
     <div className="h-screen flex flex-col bg-background">
@@ -69,16 +82,19 @@ const Index = () => {
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <SystemSidebar
-          onSelectModule={setSelectedModule}
+          onSelectModule={handleSelectModule}
+          onSelectEndpoint={handleSelectEndpoint}
           selectedModuleId={selectedModule?.id || null}
+          selectedEndpointId={selectedEndpoint?.id}
         />
 
         {/* Main Content */}
         <main className="flex-1 overflow-hidden bg-muted/30">
           {selectedModule ? (
             <DataListView
-              key={selectedModule.id}
+              key={`${selectedModule.id}-${selectedEndpoint?.id}`}
               module={selectedModule}
+              endpoint={selectedEndpoint}
             />
           ) : (
             <div className="flex items-center justify-center h-full">
@@ -88,7 +104,7 @@ const Index = () => {
                   Selecione um módulo
                 </h2>
                 <p className="text-sm text-muted-foreground/70 mt-2 max-w-md">
-                  Escolha um módulo no menu lateral para visualizar e consultar os dados.
+                  Escolha um módulo no menu lateral para visualizar os dados.
                 </p>
               </div>
             </div>
