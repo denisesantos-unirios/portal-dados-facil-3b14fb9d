@@ -4,7 +4,7 @@ import { ApiModule, Endpoint } from "@/types/api";
 import { SystemSidebar } from "@/components/SystemSidebar";
 import { DataListView } from "@/components/DataListView";
 import { NavLink } from "@/components/NavLink";
-import { Database, FileText, ListTodo, MessageSquare, LayoutGrid, ChevronRight, Home } from "lucide-react";
+import { Database, MessageSquare, LayoutGrid, ChevronRight, Home } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -47,22 +47,6 @@ const Index = () => {
             >
               <LayoutGrid className="h-4 w-4" />
               Sistema
-            </NavLink>
-            <NavLink
-              to="/documentacao"
-              className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-muted transition-colors flex items-center gap-2"
-              activeClassName="text-foreground bg-muted font-medium"
-            >
-              <FileText className="h-4 w-4" />
-              Documentação
-            </NavLink>
-            <NavLink
-              to="/backlog"
-              className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-muted transition-colors flex items-center gap-2"
-              activeClassName="text-foreground bg-muted font-medium"
-            >
-              <ListTodo className="h-4 w-4" />
-              Backlog
             </NavLink>
             <NavLink
               to="/forum"
