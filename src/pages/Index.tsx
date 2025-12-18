@@ -4,7 +4,15 @@ import { ApiModule, Endpoint } from "@/types/api";
 import { SystemSidebar } from "@/components/SystemSidebar";
 import { DataListView } from "@/components/DataListView";
 import { NavLink } from "@/components/NavLink";
-import { Database, FileText, ListTodo, MessageSquare, LayoutGrid } from "lucide-react";
+import { Database, FileText, ListTodo, MessageSquare, LayoutGrid, ChevronRight, Home } from "lucide-react";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const Index = () => {
   const [selectedModule, setSelectedModule] = useState<ApiModule | null>(apiModules[0] || null);
@@ -99,6 +107,42 @@ const Index = () => {
               Consulte informações públicas sobre compras governamentais, contratos, fornecedores e catálogos através da API de Dados Abertos do Governo Federal.
             </p>
           </div>
+
+          {/* Breadcrumb */}
+          {selectedModule && (
+            <div className="px-6 py-3 border-b border-border bg-background">
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink className="flex items-center gap-1 text-muted-foreground hover:text-foreground cursor-pointer">
+                      <Home className="h-3.5 w-3.5" />
+                      <span>Sistema</span>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator>
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </BreadcrumbSeparator>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink className="text-muted-foreground hover:text-foreground cursor-pointer">
+                      {selectedModule.name}
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  {selectedEndpoint && (
+                    <>
+                      <BreadcrumbSeparator>
+                        <ChevronRight className="h-3.5 w-3.5" />
+                      </BreadcrumbSeparator>
+                      <BreadcrumbItem>
+                        <BreadcrumbPage className="font-medium text-foreground">
+                          {selectedEndpoint.description}
+                        </BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </>
+                  )}
+                </BreadcrumbList>
+              </Breadcrumb>
+            </div>
+          )}
           
           {/* Data Content */}
           <div className="flex-1 overflow-hidden">
