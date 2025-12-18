@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { apiModules } from "@/data/modules";
-import { ApiModule, Endpoint } from "@/types/api";
+import { ApiModule } from "@/types/api";
 import { SystemSidebar } from "@/components/SystemSidebar";
 import { DataListView } from "@/components/DataListView";
 import { NavLink } from "@/components/NavLink";
@@ -8,14 +8,6 @@ import { Database, FileText, ListTodo, MessageSquare, LayoutGrid } from "lucide-
 
 const Index = () => {
   const [selectedModule, setSelectedModule] = useState<ApiModule | null>(apiModules[0] || null);
-  const [selectedEndpoint, setSelectedEndpoint] = useState<Endpoint | null>(
-    apiModules[0]?.endpoints[0] || null
-  );
-
-  const handleSelectEndpoint = (module: ApiModule, endpoint: Endpoint) => {
-    setSelectedModule(module);
-    setSelectedEndpoint(endpoint);
-  };
 
   return (
     <div className="h-screen flex flex-col bg-background">
@@ -77,27 +69,26 @@ const Index = () => {
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <SystemSidebar
-          onSelectEndpoint={handleSelectEndpoint}
-          selectedEndpointId={selectedEndpoint?.id || null}
+          onSelectModule={setSelectedModule}
+          selectedModuleId={selectedModule?.id || null}
         />
 
         {/* Main Content */}
         <main className="flex-1 overflow-hidden bg-muted/30">
-          {selectedModule && selectedEndpoint ? (
+          {selectedModule ? (
             <DataListView
-              key={selectedEndpoint.id}
+              key={selectedModule.id}
               module={selectedModule}
-              endpoint={selectedEndpoint}
             />
           ) : (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
                 <Database className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
                 <h2 className="text-xl font-medium text-muted-foreground">
-                  Selecione uma funcionalidade
+                  Selecione um módulo
                 </h2>
                 <p className="text-sm text-muted-foreground/70 mt-2 max-w-md">
-                  Escolha um módulo e funcionalidade no menu lateral para visualizar os dados.
+                  Escolha um módulo no menu lateral para visualizar e consultar os dados.
                 </p>
               </div>
             </div>
