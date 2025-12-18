@@ -194,39 +194,71 @@ export default function Backlog() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-3">
+                <div className="space-y-4">
                     {section.tasks.map((task) => {
                       const StatusIcon = statusConfig[task.status].icon;
                       return (
                         <div
                           key={task.id}
-                          className="flex items-start gap-4 p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
+                          className="p-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors border border-border/30"
                         >
-                          <div className={`p-1.5 rounded-md ${statusConfig[task.status].color}`}>
-                            <StatusIcon className="h-4 w-4" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <h4 className="font-medium text-foreground">{task.title}</h4>
-                              <div className={`w-2 h-2 rounded-full ${priorityConfig[task.priority].color}`} title={`Prioridade ${priorityConfig[task.priority].label}`} />
+                          <div className="flex items-start gap-4">
+                            <div className={`p-1.5 rounded-md ${statusConfig[task.status].color}`}>
+                              <StatusIcon className="h-4 w-4" />
                             </div>
-                            <p className="text-sm text-muted-foreground mt-1">{task.description}</p>
-                            {task.endpoint && (
-                              <code className="text-xs text-primary mt-2 block font-mono bg-primary/10 px-2 py-1 rounded w-fit">
-                                {task.endpoint}
-                              </code>
-                            )}
-                            <div className="flex flex-wrap gap-1.5 mt-3">
-                              {task.tags.map((tag) => (
-                                <Badge key={tag} variant="secondary" className="text-xs">
-                                  {tag}
-                                </Badge>
-                              ))}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <h4 className="font-medium text-foreground">{task.title}</h4>
+                                <div className={`w-2 h-2 rounded-full ${priorityConfig[task.priority].color}`} title={`Prioridade ${priorityConfig[task.priority].label}`} />
+                              </div>
+                              <p className="text-sm text-muted-foreground mt-1">{task.description}</p>
+                              {task.endpoint && (
+                                <code className="text-xs text-primary mt-2 block font-mono bg-primary/10 px-2 py-1 rounded w-fit">
+                                  {task.endpoint}
+                                </code>
+                              )}
+                              <div className="flex flex-wrap gap-1.5 mt-3">
+                                {task.tags.map((tag) => (
+                                  <Badge key={tag} variant="secondary" className="text-xs">
+                                    {tag}
+                                  </Badge>
+                                ))}
+                              </div>
                             </div>
+                            <Badge className={statusConfig[task.status].color}>
+                              {statusConfig[task.status].label}
+                            </Badge>
                           </div>
-                          <Badge className={statusConfig[task.status].color}>
-                            {statusConfig[task.status].label}
-                          </Badge>
+
+                          {/* Objetivo */}
+                          <div className="mt-4 p-3 rounded-md bg-primary/5 border-l-2 border-primary">
+                            <h5 className="text-xs font-semibold text-primary uppercase tracking-wide mb-1">Objetivo</h5>
+                            <p className="text-sm text-foreground">{task.objective}</p>
+                          </div>
+
+                          {/* Histórias de Usuário (HUs) */}
+                          <div className="mt-4 space-y-3">
+                            <h5 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Histórias de Usuário (HUs)</h5>
+                            {task.userStories.map((story) => (
+                              <div key={story.id} className="p-3 rounded-md bg-background border border-border/50">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <Badge variant="outline" className="text-xs font-mono">{story.id}</Badge>
+                                </div>
+                                <p className="text-sm text-foreground mb-2">{story.description}</p>
+                                <div className="mt-2">
+                                  <span className="text-xs font-medium text-muted-foreground">Critérios de Aceite:</span>
+                                  <ul className="mt-1 space-y-1">
+                                    {story.acceptanceCriteria.map((criteria, idx) => (
+                                      <li key={idx} className="text-xs text-muted-foreground flex items-start gap-2">
+                                        <span className="text-primary mt-0.5">✓</span>
+                                        {criteria}
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       );
                     })}
