@@ -1,11 +1,5 @@
-import { useState } from "react";
-import { NavLink } from "@/components/NavLink";
+import { MainNav } from "@/components/MainNav";
 import {
-  Database,
-  MessageSquare,
-  LayoutGrid,
-  BarChart3,
-  Bell,
   TrendingUp,
   Package,
   FileText,
@@ -29,7 +23,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  ResponsiveContainer,
 } from "recharts";
 
 // Mock data for charts
@@ -73,58 +66,7 @@ const Dashboard = () => {
   return (
     <div className="h-screen flex flex-col bg-background">
       {/* Top Nav Bar */}
-      <header className="h-12 border-b border-border bg-card flex items-center justify-between px-4 shrink-0">
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <Database className="h-5 w-5 text-primary" />
-            <span className="font-bold text-sm">ComprasGov Explorer</span>
-          </div>
-          <nav className="flex items-center gap-1">
-            <NavLink
-              to="/dashboard"
-              className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-muted transition-colors flex items-center gap-2"
-              activeClassName="text-foreground bg-muted font-medium"
-            >
-              <BarChart3 className="h-4 w-4" />
-              Visão Geral
-            </NavLink>
-            <NavLink
-              to="/"
-              className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-muted transition-colors flex items-center gap-2"
-              activeClassName="text-foreground bg-muted font-medium"
-            >
-              <LayoutGrid className="h-4 w-4" />
-              Sistema
-            </NavLink>
-            <NavLink
-              to="/notificacoes"
-              className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-muted transition-colors flex items-center gap-2"
-              activeClassName="text-foreground bg-muted font-medium"
-            >
-              <Bell className="h-4 w-4" />
-              Notificações
-            </NavLink>
-            <NavLink
-              to="/forum"
-              className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-muted transition-colors flex items-center gap-2"
-              activeClassName="text-foreground bg-muted font-medium"
-            >
-              <MessageSquare className="h-4 w-4" />
-              Fórum
-            </NavLink>
-          </nav>
-        </div>
-        <div className="text-xs text-muted-foreground">
-          <a
-            href="https://dadosabertos.compras.gov.br"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-primary transition-colors"
-          >
-            dadosabertos.compras.gov.br
-          </a>
-        </div>
-      </header>
+      <MainNav />
 
       {/* Main Content */}
       <main className="flex-1 overflow-auto bg-muted/30 p-6">
