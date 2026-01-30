@@ -4,7 +4,7 @@ import { ApiModule, Endpoint } from "@/types/api";
 import { SystemSidebar } from "@/components/SystemSidebar";
 import { DataListView } from "@/components/DataListView";
 import { NavLink } from "@/components/NavLink";
-import { Database, MessageSquare, LayoutGrid, ChevronRight, Home } from "lucide-react";
+import { Database, MessageSquare, LayoutGrid, ChevronRight, Home, BarChart3, Bell } from "lucide-react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -41,12 +41,28 @@ const Index = () => {
           </div>
           <nav className="flex items-center gap-1">
             <NavLink
+              to="/dashboard"
+              className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-muted transition-colors flex items-center gap-2"
+              activeClassName="text-foreground bg-muted font-medium"
+            >
+              <BarChart3 className="h-4 w-4" />
+              Visão Geral
+            </NavLink>
+            <NavLink
               to="/"
               className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-muted transition-colors flex items-center gap-2"
               activeClassName="text-foreground bg-muted font-medium"
             >
               <LayoutGrid className="h-4 w-4" />
               Sistema
+            </NavLink>
+            <NavLink
+              to="/notificacoes"
+              className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-muted transition-colors flex items-center gap-2"
+              activeClassName="text-foreground bg-muted font-medium"
+            >
+              <Bell className="h-4 w-4" />
+              Notificações
             </NavLink>
             <NavLink
               to="/forum"
