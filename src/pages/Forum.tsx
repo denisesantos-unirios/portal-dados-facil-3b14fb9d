@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DiscussionCard } from "@/components/DiscussionCard";
 import { forumCategories, forumStats, discussions } from "@/data/forum";
-import { NavLink } from "@/components/NavLink";
+import { MainNav } from "@/components/MainNav";
 import { NewDiscussionForm } from "@/components/NewDiscussionForm";
 
 export default function Forum() {
@@ -20,22 +20,9 @@ export default function Forum() {
   });
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="border-b border-border/50 bg-card/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <MessageSquare className="w-6 h-6 text-primary" />
-            <span className="font-bold text-lg">ComprasGov Explorer</span>
-          </div>
-          <nav className="flex items-center gap-4">
-            <NavLink to="/" className="text-muted-foreground hover:text-foreground transition-colors" activeClassName="text-primary font-medium">API Explorer</NavLink>
-            <NavLink to="/documentacao" className="text-muted-foreground hover:text-foreground transition-colors" activeClassName="text-primary font-medium">Documentação</NavLink>
-            <NavLink to="/backlog" className="text-muted-foreground hover:text-foreground transition-colors" activeClassName="text-primary font-medium">Backlog</NavLink>
-            <NavLink to="/forum" className="text-muted-foreground hover:text-foreground transition-colors" activeClassName="text-primary font-medium">Fórum</NavLink>
-          </nav>
-        </div>
-      </header>
+      <MainNav />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
