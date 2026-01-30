@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import Forum from "./pages/Forum";
 import Documentation from "./pages/Documentation";
 import Backlog from "./pages/Backlog";
+import Dashboard from "./pages/Dashboard";
+import Notifications from "./pages/Notifications";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,6 +21,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/notificacoes" element={<Notifications />} />
           <Route path="/documentacao" element={<Documentation />} />
           <Route path="/backlog" element={<Backlog />} />
           <Route path="/forum" element={<Forum />} />
