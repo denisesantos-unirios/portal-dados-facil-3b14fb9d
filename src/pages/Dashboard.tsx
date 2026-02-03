@@ -1,4 +1,6 @@
+import { GovBrHeader } from "@/components/GovBrHeader";
 import { MainNav } from "@/components/MainNav";
+import { RoadmapTimeline } from "@/components/RoadmapTimeline";
 import {
   TrendingUp,
   Package,
@@ -65,67 +67,75 @@ const chartConfig: ChartConfig = {
 const Dashboard = () => {
   return (
     <div className="h-screen flex flex-col bg-background">
-      {/* Top Nav Bar */}
+      {/* Header gov.br */}
+      <GovBrHeader />
+
+      {/* Main Navigation */}
       <MainNav />
 
       {/* Main Content */}
       <main className="flex-1 overflow-auto bg-muted/30 p-6">
         {/* Hero Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-foreground">Visão Geral - Dashboard</h1>
+          <h1 className="text-2xl font-bold text-foreground">Visão Geral</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Análise consolidada de dados de compras governamentais
+            Análise consolidada de dados de compras governamentais - Portal de Dados Abertos
           </p>
         </div>
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          <Card>
+          <Card className="shadow-card">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Materiais</CardTitle>
-              <Package className="h-4 w-4 text-muted-foreground" />
+              <Package className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">12.847</div>
+              <div className="text-2xl font-bold text-foreground">12.847</div>
               <p className="text-xs text-muted-foreground">+5.2% em relação ao mês anterior</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="shadow-card">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Serviços</CardTitle>
-              <FileText className="h-4 w-4 text-muted-foreground" />
+              <FileText className="h-4 w-4 text-primary" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">8.234</div>
+              <div className="text-2xl font-bold text-foreground">8.234</div>
               <p className="text-xs text-muted-foreground">+2.8% em relação ao mês anterior</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="shadow-card">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Contratos Ativos</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <TrendingUp className="h-4 w-4 text-success" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">3.456</div>
+              <div className="text-2xl font-bold text-foreground">3.456</div>
               <p className="text-xs text-muted-foreground">+12.3% em relação ao mês anterior</p>
             </CardContent>
           </Card>
-          <Card>
+          <Card className="shadow-card">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Volume Negociado</CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
+              <DollarSign className="h-4 w-4 text-accent-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">R$ 2.4B</div>
+              <div className="text-2xl font-bold text-foreground">R$ 2.4B</div>
               <p className="text-xs text-muted-foreground">+8.7% em relação ao mês anterior</p>
             </CardContent>
           </Card>
         </div>
 
+        {/* Roadmap Timeline */}
+        <div className="mb-6">
+          <RoadmapTimeline />
+        </div>
+
         {/* Charts Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Contratos por Mês */}
-          <Card>
+          <Card className="shadow-card">
             <CardHeader>
               <CardTitle>Contratos por Mês</CardTitle>
               <CardDescription>Quantidade de contratos firmados por mês</CardDescription>
@@ -144,7 +154,7 @@ const Dashboard = () => {
           </Card>
 
           {/* Distribuição por Categoria */}
-          <Card>
+          <Card className="shadow-card">
             <CardHeader>
               <CardTitle>Distribuição por Categoria</CardTitle>
               <CardDescription>Proporção de compras por tipo de categoria</CardDescription>
@@ -174,7 +184,7 @@ const Dashboard = () => {
           </Card>
 
           {/* Tendência Semanal */}
-          <Card className="lg:col-span-2">
+          <Card className="lg:col-span-2 shadow-card">
             <CardHeader>
               <CardTitle>Tendência Semanal de Processos</CardTitle>
               <CardDescription>Evolução do número de processos nas últimas semanas</CardDescription>

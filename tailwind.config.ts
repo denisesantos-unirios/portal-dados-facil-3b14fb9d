@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'sans-serif'],
+        sans: ['Rawline', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -33,6 +33,10 @@ export default {
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -59,6 +63,26 @@ export default {
           "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
+        },
+        // Cores gov.br diretas
+        govbr: {
+          blue: {
+            warm: {
+              90: "hsl(var(--govbr-blue-warm-vivid-90))",
+              80: "hsl(var(--govbr-blue-warm-vivid-80))",
+              70: "hsl(var(--govbr-blue-warm-vivid-70))",
+              60: "hsl(var(--govbr-blue-warm-vivid-60))",
+              50: "hsl(var(--govbr-blue-warm-vivid-50))",
+              20: "hsl(var(--govbr-blue-warm-20))",
+              10: "hsl(var(--govbr-blue-warm-10))",
+            },
+          },
+          gold: {
+            50: "hsl(var(--govbr-gold-vivid-50))",
+            20: "hsl(var(--govbr-gold-vivid-20))",
+          },
+          green: "hsl(var(--govbr-green-cool-vivid-50))",
+          red: "hsl(var(--govbr-red-vivid-50))",
         },
       },
       borderRadius: {

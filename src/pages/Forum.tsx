@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DiscussionCard } from "@/components/DiscussionCard";
 import { forumCategories, forumStats, discussions } from "@/data/forum";
+import { GovBrHeader } from "@/components/GovBrHeader";
 import { MainNav } from "@/components/MainNav";
 import { NewDiscussionForm } from "@/components/NewDiscussionForm";
 
@@ -21,112 +22,117 @@ export default function Forum() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
+      {/* Header gov.br */}
+      <GovBrHeader />
+
+      {/* Main Navigation */}
       <MainNav />
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        {/* Page Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-foreground flex items-center justify-center gap-3 mb-2">
-            <MessageSquare className="w-8 h-8 text-primary" />
-            Fórum de Discussões
-          </h1>
-          <p className="text-muted-foreground">
-            Tire dúvidas, compartilhe conhecimento e conecte-se com outros desenvolvedores.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Sidebar */}
-          <div className="lg:col-span-1 space-y-4">
-            {/* New Discussion Button */}
-            <NewDiscussionForm />
-
-            {/* Categories */}
-            <Card className="p-4">
-              <h3 className="font-semibold mb-3 text-foreground">Categorias</h3>
-              <div className="space-y-1">
-                {forumCategories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`w-full flex items-center justify-between px-3 py-2 rounded-md text-sm transition-colors ${
-                      selectedCategory === category.id
-                        ? "bg-primary text-primary-foreground"
-                        : "hover:bg-accent text-foreground"
-                    }`}
-                  >
-                    <span>{category.name}</span>
-                    <span className={`text-xs px-2 py-0.5 rounded-full ${
-                      selectedCategory === category.id
-                        ? "bg-primary-foreground/20 text-primary-foreground"
-                        : "bg-muted text-muted-foreground"
-                    }`}>
-                      {category.count}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </Card>
-
-            {/* Statistics */}
-            <Card className="p-4">
-              <h3 className="font-semibold mb-3 text-foreground">Estatísticas</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground flex items-center gap-2">
-                    <MessagesSquare className="w-4 h-4" />
-                    Discussões
-                  </span>
-                  <span className="font-semibold text-foreground">{forumStats.discussions}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground flex items-center gap-2">
-                    <Users className="w-4 h-4" />
-                    Membros
-                  </span>
-                  <span className="font-semibold text-foreground">{forumStats.members}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground flex items-center gap-2">
-                    <MessageSquare className="w-4 h-4" />
-                    Respostas
-                  </span>
-                  <span className="font-semibold text-foreground">{forumStats.responses}</span>
-                </div>
-              </div>
-            </Card>
+      <main className="flex-1 bg-muted/30">
+        <div className="container mx-auto px-4 py-8">
+          {/* Page Header */}
+          <div className="mb-8">
+            <h1 className="text-2xl font-bold text-foreground flex items-center gap-3 mb-2">
+              <MessageSquare className="w-6 h-6 text-primary" />
+              Fórum de Discussões
+            </h1>
+            <p className="text-muted-foreground">
+              Tire dúvidas, compartilhe conhecimento e conecte-se com outros desenvolvedores.
+            </p>
           </div>
 
-          {/* Discussion List */}
-          <div className="lg:col-span-3">
-            {/* Search */}
-            <div className="relative mb-4">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input
-                placeholder="Buscar discussões..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-              />
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            {/* Sidebar */}
+            <div className="lg:col-span-1 space-y-4">
+              {/* New Discussion Button */}
+              <NewDiscussionForm />
+
+              {/* Categories */}
+              <Card className="p-4 shadow-card">
+                <h3 className="font-semibold mb-3 text-foreground">Categorias</h3>
+                <div className="space-y-1">
+                  {forumCategories.map((category) => (
+                    <button
+                      key={category.id}
+                      onClick={() => setSelectedCategory(category.id)}
+                      className={`w-full flex items-center justify-between px-3 py-2 rounded text-sm transition-colors ${
+                        selectedCategory === category.id
+                          ? "bg-primary text-primary-foreground"
+                          : "hover:bg-muted text-foreground"
+                      }`}
+                    >
+                      <span>{category.name}</span>
+                      <span className={`text-xs px-2 py-0.5 rounded-full ${
+                        selectedCategory === category.id
+                          ? "bg-primary-foreground/20 text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}>
+                        {category.count}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </Card>
+
+              {/* Statistics */}
+              <Card className="p-4 shadow-card">
+                <h3 className="font-semibold mb-3 text-foreground">Estatísticas</h3>
+                <div className="space-y-2 text-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground flex items-center gap-2">
+                      <MessagesSquare className="w-4 h-4" />
+                      Discussões
+                    </span>
+                    <span className="font-semibold text-foreground">{forumStats.discussions}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground flex items-center gap-2">
+                      <Users className="w-4 h-4" />
+                      Membros
+                    </span>
+                    <span className="font-semibold text-foreground">{forumStats.members}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground flex items-center gap-2">
+                      <MessageSquare className="w-4 h-4" />
+                      Respostas
+                    </span>
+                    <span className="font-semibold text-foreground">{forumStats.responses}</span>
+                  </div>
+                </div>
+              </Card>
             </div>
 
-            {/* Discussions */}
-            <ScrollArea className="h-[calc(100vh-320px)]">
-              <div className="space-y-3 pr-4">
-                {filteredDiscussions.length > 0 ? (
-                  filteredDiscussions.map((discussion) => (
-                    <DiscussionCard key={discussion.id} discussion={discussion} />
-                  ))
-                ) : (
-                  <Card className="p-8 text-center">
-                    <MessageSquare className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-muted-foreground">Nenhuma discussão encontrada.</p>
-                  </Card>
-                )}
+            {/* Discussion List */}
+            <div className="lg:col-span-3">
+              {/* Search */}
+              <div className="relative mb-4">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  placeholder="Buscar discussões..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
               </div>
-            </ScrollArea>
+
+              {/* Discussions */}
+              <ScrollArea className="h-[calc(100vh-380px)]">
+                <div className="space-y-3 pr-4">
+                  {filteredDiscussions.length > 0 ? (
+                    filteredDiscussions.map((discussion) => (
+                      <DiscussionCard key={discussion.id} discussion={discussion} />
+                    ))
+                  ) : (
+                    <Card className="p-8 text-center shadow-card">
+                      <MessageSquare className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                      <p className="text-muted-foreground">Nenhuma discussão encontrada.</p>
+                    </Card>
+                  )}
+                </div>
+              </ScrollArea>
+            </div>
           </div>
         </div>
       </main>
