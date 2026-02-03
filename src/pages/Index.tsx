@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { apiModules } from "@/data/modules";
 import { ApiModule, Endpoint } from "@/types/api";
+import { GovBrHeader } from "@/components/GovBrHeader";
+import { MainNav } from "@/components/MainNav";
 import { SystemSidebar } from "@/components/SystemSidebar";
 import { DataListView } from "@/components/DataListView";
-import { MainNav } from "@/components/MainNav";
 import { Database, ChevronRight, Home } from "lucide-react";
 import {
   Breadcrumb,
@@ -32,7 +33,10 @@ const Index = () => {
 
   return (
     <div className="h-screen flex flex-col bg-background">
-      {/* Top Nav Bar */}
+      {/* Header gov.br */}
+      <GovBrHeader />
+
+      {/* Main Navigation */}
       <MainNav />
 
       {/* Main Layout */}
@@ -47,23 +51,13 @@ const Index = () => {
 
         {/* Main Content */}
         <main className="flex-1 overflow-hidden bg-muted/30 flex flex-col">
-          {/* Hero Header */}
-          <div className="px-6 py-5 border-b border-border bg-card">
-            <h1 className="text-xl font-bold text-foreground">
-              Dados Abertos - Compras Gov
-            </h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              Consulte informações públicas sobre compras governamentais, contratos, fornecedores e catálogos através da API de Dados Abertos do Governo Federal.
-            </p>
-          </div>
-
           {/* Breadcrumb */}
           {selectedModule && (
-            <div className="px-6 py-3 border-b border-border bg-background">
+            <div className="px-6 py-3 border-b border-border bg-card">
               <Breadcrumb>
                 <BreadcrumbList>
                   <BreadcrumbItem>
-                    <BreadcrumbLink className="flex items-center gap-1 text-muted-foreground hover:text-foreground cursor-pointer">
+                    <BreadcrumbLink className="flex items-center gap-1 text-muted-foreground hover:text-primary cursor-pointer">
                       <Home className="h-3.5 w-3.5" />
                       <span>Sistema</span>
                     </BreadcrumbLink>
@@ -72,7 +66,7 @@ const Index = () => {
                     <ChevronRight className="h-3.5 w-3.5" />
                   </BreadcrumbSeparator>
                   <BreadcrumbItem>
-                    <BreadcrumbLink className="text-muted-foreground hover:text-foreground cursor-pointer">
+                    <BreadcrumbLink className="text-muted-foreground hover:text-primary cursor-pointer">
                       {selectedModule.name}
                     </BreadcrumbLink>
                   </BreadcrumbItem>

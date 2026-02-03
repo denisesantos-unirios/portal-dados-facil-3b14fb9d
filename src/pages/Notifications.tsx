@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { GovBrHeader } from "@/components/GovBrHeader";
 import { MainNav } from "@/components/MainNav";
 import {
   Bell,
@@ -8,6 +9,7 @@ import {
   CheckCircle,
   Trash2,
   Send,
+  Wrench,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -46,27 +48,27 @@ interface Notification {
 const tipoConfig = {
   manutencao: {
     label: "Manutenção",
-    icon: AlertTriangle,
-    badgeVariant: "destructive" as const,
-    color: "text-destructive",
+    icon: Wrench,
+    badgeClass: "bg-destructive text-destructive-foreground",
+    iconClass: "text-destructive",
   },
   info: {
     label: "Informação",
     icon: Info,
-    badgeVariant: "secondary" as const,
-    color: "text-blue-500",
+    badgeClass: "bg-primary text-primary-foreground",
+    iconClass: "text-primary",
   },
   alerta: {
     label: "Alerta",
     icon: AlertTriangle,
-    badgeVariant: "outline" as const,
-    color: "text-yellow-500",
+    badgeClass: "bg-accent text-accent-foreground",
+    iconClass: "text-accent-foreground",
   },
   sucesso: {
     label: "Sucesso",
     icon: CheckCircle,
-    badgeVariant: "default" as const,
-    color: "text-green-500",
+    badgeClass: "bg-success text-success-foreground",
+    iconClass: "text-success",
   },
 };
 
@@ -141,7 +143,10 @@ const Notifications = () => {
 
   return (
     <div className="h-screen flex flex-col bg-background">
-      {/* Top Nav Bar */}
+      {/* Header gov.br */}
+      <GovBrHeader />
+
+      {/* Main Navigation */}
       <MainNav />
 
       {/* Main Content */}
@@ -156,7 +161,7 @@ const Notifications = () => {
           </div>
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="gap-2">
+              <Button className="gap-2 govbr-button-primary">
                 <Plus className="h-4 w-4" />
                 Nova Notificação
               </Button>
@@ -241,10 +246,10 @@ const Notifications = () => {
         </div>
 
         {/* Notifications List */}
-        <ScrollArea className="h-[calc(100vh-200px)]">
+        <ScrollArea className="h-[calc(100vh-280px)]">
           <div className="space-y-4">
             {notificacoes.length === 0 ? (
-              <Card>
+              <Card className="shadow-card">
                 <CardContent className="flex flex-col items-center justify-center py-12">
                   <Bell className="h-12 w-12 text-muted-foreground/30 mb-4" />
                   <p className="text-muted-foreground">Nenhuma notificação cadastrada</p>
@@ -256,17 +261,17 @@ const Notifications = () => {
                 const Icon = config.icon;
 
                 return (
-                  <Card key={notificacao.id}>
+                  <Card key={notificacao.id} className="shadow-card">
                     <CardHeader className="pb-3">
                       <div className="flex items-start justify-between">
                         <div className="flex items-start gap-3">
-                          <div className={`mt-0.5 ${config.color}`}>
+                          <div className={`mt-0.5 ${config.iconClass}`}>
                             <Icon className="h-5 w-5" />
                           </div>
                           <div>
                             <CardTitle className="text-base">{notificacao.titulo}</CardTitle>
-                            <div className="flex items-center gap-2 mt-1">
-                              <Badge variant={config.badgeVariant}>{config.label}</Badge>
+                            <div className="flex items-center gap-2 mt-1 flex-wrap">
+                              <Badge className={config.badgeClass}>{config.label}</Badge>
                               {notificacao.endpoint && (
                                 <Badge variant="outline" className="font-mono text-xs">
                                   {notificacao.endpoint}
