@@ -6,6 +6,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { DiscussionCard } from "@/components/DiscussionCard";
 import { forumCategories, forumStats, discussions } from "@/data/forum";
 import { GovBrHeader } from "@/components/GovBrHeader";
+import { GovBrFooter } from "@/components/GovBrFooter";
 import { MainNav } from "@/components/MainNav";
 import { NewDiscussionForm } from "@/components/NewDiscussionForm";
 
@@ -136,6 +137,8 @@ export default function Forum() {
           </div>
         </div>
       </main>
+
+      <GovBrFooter />
     </div>
   );
 }

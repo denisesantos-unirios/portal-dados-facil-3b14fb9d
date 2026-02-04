@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { GovBrHeader } from "@/components/GovBrHeader";
+import { GovBrFooter } from "@/components/GovBrFooter";
 import { MainNav } from "@/components/MainNav";
 import {
   Bell,
@@ -303,6 +304,8 @@ const Notifications = () => {
           </div>
         </ScrollArea>
       </main>
+
+      <GovBrFooter />
     </div>
   );
 };
