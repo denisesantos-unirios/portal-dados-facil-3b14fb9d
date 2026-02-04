@@ -1,4 +1,5 @@
 import { GovBrHeader } from "@/components/GovBrHeader";
+import { GovBrFooter } from "@/components/GovBrFooter";
 import { MainNav } from "@/components/MainNav";
 import { RoadmapTimeline } from "@/components/RoadmapTimeline";
 import {
@@ -209,6 +210,8 @@ const Dashboard = () => {
           </Card>
         </div>
       </main>
+
+      <GovBrFooter />
     </div>
   );
 };

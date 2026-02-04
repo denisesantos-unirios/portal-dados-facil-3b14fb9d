@@ -2,6 +2,7 @@ import { useState } from "react";
 import { apiModules } from "@/data/modules";
 import { ApiModule, Endpoint } from "@/types/api";
 import { GovBrHeader } from "@/components/GovBrHeader";
+import { GovBrFooter } from "@/components/GovBrFooter";
 import { MainNav } from "@/components/MainNav";
 import { SystemSidebar } from "@/components/SystemSidebar";
 import { DataListView } from "@/components/DataListView";
@@ -111,6 +112,8 @@ const Index = () => {
           </div>
         </main>
       </div>
+
+      <GovBrFooter />
     </div>
   );
 };
