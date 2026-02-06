@@ -1,5 +1,5 @@
 import { NavLink } from "@/components/NavLink";
-import { LayoutGrid, BarChart3, Bell, MessageSquare } from "lucide-react";
+import { Home, LayoutGrid, BarChart3, Bell, MessageSquare } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { apiModules } from "@/data/modules";
 import { discussions } from "@/data/forum";
@@ -23,6 +23,14 @@ export function MainNav() {
     <nav className="h-12 border-b border-border bg-card flex items-center px-4 lg:px-8 shrink-0">
       <div className="flex items-center gap-1">
         <NavLink
+          to="/"
+          className="px-4 py-2.5 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors flex items-center gap-2 border-b-2 border-transparent"
+          activeClassName="text-primary font-semibold border-b-2 border-primary bg-primary/5"
+        >
+          <Home className="h-4 w-4" />
+          Início
+        </NavLink>
+        <NavLink
           to="/dashboard"
           className="px-4 py-2.5 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors flex items-center gap-2 border-b-2 border-transparent"
           activeClassName="text-primary font-semibold border-b-2 border-primary bg-primary/5"
@@ -34,7 +42,7 @@ export function MainNav() {
           </Badge>
         </NavLink>
         <NavLink
-          to="/"
+          to="/sistema"
           className="px-4 py-2.5 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors flex items-center gap-2 border-b-2 border-transparent"
           activeClassName="text-primary font-semibold border-b-2 border-primary bg-primary/5"
         >
