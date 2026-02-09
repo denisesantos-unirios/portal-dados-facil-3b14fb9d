@@ -10,6 +10,7 @@ import Documentation from "./pages/Documentation";
 import Backlog from "./pages/Backlog";
 import Dashboard from "./pages/Dashboard";
 import Notifications from "./pages/Notifications";
+import Roadmap from "./pages/Roadmap";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/notificacoes" element={<Notifications />} />
           <Route path="/documentacao" element={<Documentation />} />
           <Route path="/backlog" element={<Backlog />} />
+          <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/forum" element={<Forum />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

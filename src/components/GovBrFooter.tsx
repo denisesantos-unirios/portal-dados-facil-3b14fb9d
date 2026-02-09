@@ -20,6 +20,13 @@ export function GovBrFooter() {
           </p>
           <div className="flex items-center gap-4">
             <Link
+              to="/roadmap"
+              className="text-primary hover:underline"
+            >
+              Roadmap
+            </Link>
+            <span className="text-border">|</span>
+            <Link
               to="/documentacao"
               className="text-primary hover:underline"
             >
