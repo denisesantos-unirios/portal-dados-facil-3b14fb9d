@@ -62,6 +62,7 @@ const moduleStatusMap: Record<string, { status: DeliveryStatus; sprint?: string 
   "pagina-inicial": { status: "entregue", sprint: "Sprint 7" },
   "notificacoes": { status: "entregue", sprint: "Sprint 7" },
   "forum": { status: "entregue", sprint: "Sprint 7" },
+  "visao-geral": { status: "entregue", sprint: "Sprint 7" },
   "alice": { status: "em-andamento", sprint: "Sprint 8" },
   "pca": { status: "previsto", sprint: "Sprint 9" },
 };

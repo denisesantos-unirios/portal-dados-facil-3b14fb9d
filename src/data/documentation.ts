@@ -320,6 +320,28 @@ export const moduleFlows: ModuleFlow[] = [
     ],
   },
   {
+    id: "visao-geral",
+    number: "15",
+    name: "Visão Geral - Dashboard",
+    description: "Painel analítico com indicadores consolidados de compras governamentais, gráficos de contratos por mês, distribuição por categoria, tendência semanal de processos e resumo do roadmap de entregas.",
+    icon: "BarChart3",
+    color: "bg-chart-1",
+    endpoints: [
+      { method: "GET", path: "/dashboard/indicadores", description: "Exibe cards com totais de materiais, serviços, contratos ativos e volume negociado" },
+      { method: "GET", path: "/dashboard/contratos-mes", description: "Exibe gráfico de barras com contratos firmados por mês" },
+      { method: "GET", path: "/dashboard/distribuicao-categoria", description: "Exibe gráfico de pizza com proporção de compras por categoria" },
+      { method: "GET", path: "/dashboard/tendencia-semanal", description: "Exibe gráfico de linha com evolução semanal de processos" },
+      { method: "GET", path: "/dashboard/roadmap-resumo", description: "Exibe timeline resumida do roadmap de entregas" },
+    ],
+    useCases: [
+      "Visualizar indicadores consolidados de compras públicas",
+      "Acompanhar evolução mensal de contratos firmados",
+      "Analisar distribuição de compras por categoria (materiais, serviços, obras)",
+      "Monitorar tendência semanal de processos licitatórios",
+      "Acompanhar progresso geral das entregas do portal",
+    ],
+  },
+  {
     id: "alice",
     number: "98",
     name: "ALICE - Analisador de Licitações",
